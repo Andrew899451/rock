@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BUY A ROCK</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .hero-text h1 { font-size: 3rem; margin-bottom: 20px; }
+        .hero-text p { font-size: 1.1rem; line-height: 1.5; margin-bottom: 10px; font-weight: bold;}
+        
+        /* Styling for my image */
+        .rock-img { 
+            width: 400px; 
+            height: 400px; 
+            border-radius: 10px; 
+            border: 3px solid #1a1a1a;
+            object-fit: cover; /* Keeps my image from stretching */
+        }
+
+        /* Game Styles */
+        .game-area { margin-top: 20px; text-align: center; display: none; }
+        .game-area.active { display: block; }
+        .water { width: 100%; height: 100px; background: #6ab0e3; border-radius: 50%; margin-top: 20px; position: relative; overflow: hidden; }
+        .skipping-rock { width: 20px; height: 20px; background: #888; border-radius: 50%; position: absolute; bottom: 0; left: 0; transition: all 0.5s linear; }
+
+        /* Style for the clickable map image in the footer */
+        .footer-map-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 5px;
+            object-fit: cover;
+            border: 2px solid #1a1a1a;
+            transition: transform 0.2s;
+        }
+        .footer-map-img:hover {
+            transform: scale(1.1); /* Little pop effect when hovering */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="store.html">Store</a>
+            <a href="location.html">Location</a>
+        </nav>
+
+        <main class="main-content">
+            <div class="hero-text">
+                <h1>BUY A ROCK</h1>
+                <p>You need a rock. We have a rock.</p>
+                <p>Tired of complicated products? Sick of technology? Looking for something that does absolutely nothing? Meet Rock.</p>
+                <p>Rock is a completely ordinary rock. It has no Wi-Fi, no Bluetooth, no batteries, and no subscription fees. It simply exists.</p>
+                <p><strong>WHY BUY A ROCK?</strong><br>
+                - 100% Rock<br>
+                - Made from real rock. No artificial rocks.<br>
+                - Zero Features<br>
+                - Extremely Durable<br>
+                - Great Conversation Starter</p>
+                <p><strong>ONLY $999</strong></p>
+                
+                <button class="btn" id="orderBtn">Order now!</button>
+
+                <!-- Secret Game -->
+                <div class="game-area" id="gameArea">
+                    <h3>Bored waiting for your rock? Skip this stone!</h3>
+                    <button class="btn" style="padding: 5px 20px; font-size: 1rem;" onclick="skipStone()">Click to Skip!</button>
+                    <div class="water" id="water">
+                        <div class="skipping-rock" id="skipRock"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <img src="images/rocks.jpg" alt="A pile of rocks" class="rock-img">
+            
+        </main>
+
+        <footer>
+            <div class="footer-left">
+                <a href="index.html" style="color: black; text-decoration: none;">Home</a>
+                <a href="location.html" style="color: black; text-decoration: none;">Location</a>
+            </div>
+            <div class="footer-info">
+                Rock store:<br>
+                1880 Islington Ave<br>
+                Toronto, Ontario(ON), M9V 3B6<br>
+                647-228-1528<br><br>
+                info@rockstore.org<br>
+                Copyright © 2026. Andrew Primyshev
+            </div>
+            <div class="footer-right">
+                <div class="social-icons">𝕏 ⌾</div>
+                
+                <a href="location.html">
+                    <img src="images/map.jpg" 
+                         alt="Map location" 
+                         class="footer-map-img">
+                </a>
+
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        let clickCount = 0;
+        document.getElementById('orderBtn').addEventListener('click', function(e) {
+            clickCount++;
+            if (clickCount === 1) {
+                document.getElementById('gameArea').classList.add('active');
+                this.innerText = "Go to Store ->";
+            } else {
+                window.location.href = 'store.html';
+            }
+        });
+
+        let skips = 0;
+        function skipStone() {
+            const rock = document.getElementById('skipRock');
+            skips++;
+            if (skips > 5) {
+                skips = 0; 
+                rock.style.left = '0px';
+                rock.style.bottom = '0px';
+            } else {
+                rock.style.left = (skips * 15) + '%';
+                rock.style.bottom = (Math.sin(skips) * 40 + 50) + 'px';
+            }
+        }
+    </script>
+</body>
+</html>

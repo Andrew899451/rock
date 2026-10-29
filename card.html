@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buy a Rock</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .checkout-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 40px;
+            margin-top: 50px;
+        }
+
+        .checkout-form h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            text-shadow: 2px 2px 0px #fff;
+            margin-bottom: 20px;
+        }
+
+        .input-box {
+            width: 80%;
+            padding: 15px;
+            border-radius: 30px;
+            border: none;
+            background-color: #fce4ec; /* Light pinkish color */
+            font-size: 1.2rem;
+            text-align: center;
+            font-family: 'Comic Neue', cursive;
+            font-weight: bold;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .row {
+            display: flex;
+            gap: 20px;
+            width: 80%;
+            justify-content: space-between;
+        }
+
+        .row .input-box {
+            width: 45%;
+        }
+
+        .submit-btn {
+            background-color: #333;
+            color: white;
+            padding: 15px 60px;
+            border-radius: 30px;
+            border: none;
+            font-size: 1.5rem;
+            font-family: 'Comic Neue', cursive;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 4px 0 #000;
+        }
+
+        .submit-btn:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        #loadingText {
+            display: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            color: darkred;
+        }
+
+        /* Style for the clickable map image in the footer */
+        .footer-map-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 5px;
+            object-fit: cover;
+            border: 2px solid #1a1a1a;
+            transition: transform 0.2s;
+        }
+        .footer-map-img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="store.html">Store</a>
+            <a href="location.html">Location</a>
+        </nav>
+
+        <main>
+            <form class="checkout-form" onsubmit="processPayment(event)">
+                <h2>Wanna buy a rock? Sure! Give us your card data</h2>
+                
+                <input type="text" class="input-box" placeholder="card number" required>
+                <input type="email" class="input-box" placeholder="your email" required>
+                
+                <div class="row">
+                    <input type="text" class="input-box" placeholder="expiring date" required>
+                    <input type="text" class="input-box" placeholder="cvv" required>
+                </div>
+
+                <button type="submit" class="submit-btn">submit</button>
+                <div id="loadingText">Processing payment for rock... please wait.</div>
+            </form>
+        </main>
+
+        <footer>
+            <div class="footer-left">
+                <a href="index.html" style="color: black; text-decoration: none;">Home</a>
+                <a href="location.html" style="color: black; text-decoration: none;">Location</a>
+            </div>
+            <div class="footer-info">
+                Recovery path:<br>
+                1880 Islington Ave<br>
+                Toronto, Ontario(ON), M9V 3B6<br>
+                647-228-1528<br><br>
+                info@rockstore.org<br>
+                Copyright © 2026. Andrew Primyshev
+            </div>
+            <div class="footer-right">
+                <div class="social-icons">𝕏 ⌾</div>
+                
+                <!-- Clickable image -->
+                <a href="location.html">
+                    <img src="images/map.jpg" alt="Map location" class="footer-map-img">
+                </a>
+
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function processPayment(e) {
+            e.preventDefault(); // Prevent actual form submission
+            
+            const btn = document.querySelector('.submit-btn');
+            const loading = document.getElementById('loadingText');
+            
+            btn.style.display = 'none';
+            loading.style.display = 'block';
+            loading.innerText = "Finding a rock...";
+
+            setTimeout(() => {
+                loading.innerText = "Dusting off the rock...";
+            }, 1500);
+
+            setTimeout(() => {
+                loading.innerText = "Taking your money...";
+            }, 3000);
+
+            setTimeout(() => {
+                loading.innerText = "Error 404: Rock not found. (Just kidding, transaction successful!)";
+                loading.style.color = "green";
+            }, 4500);
+
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 6500);
+        }
+    </script>
+</body>
+</html>
